@@ -26,7 +26,7 @@ namespace UITests
         [TestInitialize]
         public void Initialize()
         {
-            driver = new FirefoxDriver();
+            driver = new InternetExplorerDriver();
             driver.Url = _homePageUrl;
             driver.Navigate();
         }
