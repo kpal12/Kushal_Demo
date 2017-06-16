@@ -59,15 +59,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="SampleFeatureToggles\SampleFeatureToggle.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MvcMusicStore\MvcMusicStore.csproj">
-      <Project>{32dcd27d-a84c-4250-b657-408b3620a9ac}</Project>
-      <Name>MvcMusicStore</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
