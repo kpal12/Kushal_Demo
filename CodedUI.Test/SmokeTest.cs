@@ -36,8 +36,7 @@ namespace UITests
         public void CanAddProductToShoppingBasketAndCheckOut()
         {
 
-            Playback.PlaybackSettings.WaitForReadyLevel = WaitForReadyLevel.Disabled;
-            BrowserWindow.CurrentBrowser = "Firefox";
+            Playback.PlaybackSettings.WaitForReadyLevel = WaitForReadyLevel.Disabled;           
             var bw = BrowserWindow.Launch(_homePageUrl);
             var home = new HomePage(bw);
             Assert.IsTrue(
