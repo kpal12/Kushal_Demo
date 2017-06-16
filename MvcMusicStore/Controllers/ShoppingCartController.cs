@@ -4,10 +4,7 @@ using System.Web.Mvc;
 using MvcMusicStore.Models;
 using MvcMusicStore.ViewModels;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using System.Net.Http;
-using Microsoft.ApplicationInsights;
+
 
 namespace MvcMusicStore.Controllers
 {
@@ -70,9 +67,9 @@ namespace MvcMusicStore.Controllers
             // Remove from cart
             int itemCount = cart.RemoveFromCart(id);
             // log telemetry data to understand when people remove items from the basket
-            LogTelemetryEvent(cart, album);
-            if (cart.GetTotal() > 30)
-                throw new InvalidOperationException("Value is > 30, not allowed to remove items....:-)");
+            //LogTelemetryEvent(cart, album);
+            //if (cart.GetTotal() > 30)
+            //    throw new InvalidOperationException("Value is > 30, not allowed to remove items....:-)");
 
             // Display the confirmation message
             var results = new ShoppingCartRemoveViewModel
@@ -110,19 +107,19 @@ namespace MvcMusicStore.Controllers
         }
 
 
-        private void LogTelemetryEvent(ShoppingCart cart, Album album)
-        {
-            var basketValue = GetShoppingbasketTotalRange(cart);
-            TelemetryClient client = new TelemetryClient();
-            var properties = new Dictionary<string, string>();
-            properties.Add("Amount segment", GetShoppingbasketTotalRangeSegment(basketValue).ToString());
-            properties.Add("Genre", album.Genre.Name);
-            properties.Add("Artist Name", album.Artist.Name);
-            var measurements = new Dictionary<string, double>();
-            measurements.Add("TotalAmount", basketValue);
+        //private void LogTelemetryEvent(ShoppingCart cart, Album album)
+        //{
+        //    var basketValue = GetShoppingbasketTotalRange(cart);
+        //    TelemetryClient client = new TelemetryClient();
+        //    var properties = new Dictionary<string, string>();
+        //    properties.Add("Amount segment", GetShoppingbasketTotalRangeSegment(basketValue).ToString());
+        //    properties.Add("Genre", album.Genre.Name);
+        //    properties.Add("Artist Name", album.Artist.Name);
+        //    var measurements = new Dictionary<string, double>();
+        //    measurements.Add("TotalAmount", basketValue);
 
-            client.TrackEvent("Item removed", properties, measurements);
-        }
+        //    client.TrackEvent("Item removed", properties, measurements);
+        //}
 
         private double GetShoppingbasketTotalRangeSegment(double basketValue)
         {

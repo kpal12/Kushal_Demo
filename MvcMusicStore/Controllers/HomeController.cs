@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System;
-using Microsoft.ApplicationInsights;
-//using MvcMusicStore.Featuretoggles;
+
 
 namespace MvcMusicStore.Controllers
 {
@@ -31,7 +30,7 @@ namespace MvcMusicStore.Controllers
             return View(albums);
         }
 
-       
+
 
         private List<Album> GetTopSellingAlbums(int count)
         {
@@ -46,22 +45,15 @@ namespace MvcMusicStore.Controllers
         private string GetCountryFromClient(string ip)
         {
             var result = "unknown location";
-            try
-            {
-                var serviceUrl = "http://ipinfo.io/" + ip;
-                HttpClient request = new HttpClient();
-                var taskresult = request.GetStringAsync((new Uri(serviceUrl)));
-                taskresult.Wait();
+            var serviceUrl = "http://ipinfo.io/" + ip;
+            HttpClient request = new HttpClient();
+            var taskresult = request.GetStringAsync((new Uri(serviceUrl)));
+            taskresult.Wait();
 
-                var location = JsonConvert.DeserializeObject<Location>(taskresult.Result);
+            var location = JsonConvert.DeserializeObject<Location>(taskresult.Result);
 
-                result = location.loc;
-            }
-            catch (Exception e)
-            {
-                TelemetryClient client = new TelemetryClient();
-                client.TrackException(e);
-            }
+            result = location.loc;
+
             return result;
         }
 
